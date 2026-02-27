@@ -1,45 +1,83 @@
 import { Layout } from '../shared/layout';
 
-const candidates = [
-  { alias: 'Luna-Fox', distance: '3.2 km', vibe: 'Nocturna · Arte · Caminatas' },
-  { alias: 'Kiro-Wolf', distance: '7.8 km', vibe: 'Gaming · Naturaleza · Café' },
-  { alias: 'Nova-Cat', distance: '12 km', vibe: 'Lectura · Música · Activismo animal' },
+const cards = [
+  {
+    alias: 'Luna-Fox',
+    age: 25,
+    distance: '3 km',
+    vibe: 'Nocturna · Arte · Senderismo',
+    image:
+      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    alias: 'Kiro-Wolf',
+    age: 27,
+    distance: '8 km',
+    vibe: 'Gaming · Café · Naturaleza',
+    image:
+      'https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    alias: 'Nova-Cat',
+    age: 24,
+    distance: '12 km',
+    vibe: 'Música · Lectura · Activismo animal',
+    image:
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80',
+  },
 ];
 
 export function MatchingPage() {
+  const [top, second, third] = cards;
+
   return (
     <Layout>
-      <section className="grid two">
-        <article className="card">
-          <h2>Descubre perfiles afines</h2>
-          <p className="muted">Ajusta tus filtros y desliza con intención. Las coincidencias son mutuas.</p>
-          <div className="actions">
-            <button className="btn btn-ghost">Distancia: 25 km</button>
-            <button className="btn btn-ghost">Edad: 18–34</button>
-            <button className="btn btn-ghost">Intereses: 4</button>
-          </div>
-          <ul className="list" style={{ marginTop: 14 }}>
-            {candidates.map((c) => (
-              <li className="list-item" key={c.alias}>
-                <b>{c.alias}</b>
-                <div className="muted">{c.vibe}</div>
-                <div className="muted">📍 {c.distance}</div>
-              </li>
-            ))}
-          </ul>
-        </article>
+      <section className="tinder-wrap">
+        <div className="tinder-stack">
+          <div className="swipe-card card back-2" style={{ backgroundImage: `url(${third.image})` }} />
+          <div className="swipe-card card back-1" style={{ backgroundImage: `url(${second.image})` }} />
+          <article className="swipe-card" style={{ backgroundImage: `url(${top.image})` }}>
+            <div className="meta">
+              <h2>
+                {top.alias}, {top.age}
+              </h2>
+              <p>{top.vibe}</p>
+              <p>📍 {top.distance}</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-        <aside className="card">
-          <h2>Seguridad activa</h2>
+      <div className="actions-row" aria-label="Acciones de swipe">
+        <button className="circle-btn" title="Nope" aria-label="Nope">
+          ✕
+        </button>
+        <button className="circle-btn primary" title="Like" aria-label="Like">
+          ❤
+        </button>
+        <button className="circle-btn" title="Super like" aria-label="Super like">
+          ★
+        </button>
+      </div>
+
+      <section className="bottom-sheet">
+        <div className="card">
+          <h3 style={{ margin: '0 0 8px' }}>Filtros rápidos</h3>
+          <div className="actions">
+            <button className="btn">Distancia: 25 km</button>
+            <button className="btn">Edad: 18–34</button>
+            <button className="btn">Intereses</button>
+            <button className="btn btn-primary">Aplicar</button>
+          </div>
+        </div>
+
+        <div className="card">
+          <h3 style={{ margin: '0 0 8px' }}>Trust & Safety</h3>
           <ul className="list">
-            <li className="list-item">Bloqueo y reporte visibles en cada interacción.</li>
-            <li className="list-item">Rate limits y anti-spam para proteger conversaciones.</li>
+            <li className="list-item">Reportar y bloquear accesible desde cada perfil.</li>
             <li className="list-item">Ubicación aproximada por defecto para mayor privacidad.</li>
           </ul>
-          <div className="actions">
-            <button className="btn btn-primary">Empezar a deslizar</button>
-          </div>
-        </aside>
+        </div>
       </section>
     </Layout>
   );
