@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(npm install prisma @prisma/client @nestjs/jwt @nestjs/passport @nestjs/config passport passport-jwt bcrypt class-validator class-transformer ioredis)",
+      "Bash(npm install --save-dev @types/passport-jwt @types/bcrypt)",
+      "Bash(docker-compose ps)",
+      "Bash(docker-compose up -d)",
+      "Bash(npx prisma migrate dev --name init)",
+      "Bash(npm install @prisma/adapter-pg pg dotenv)",
+      "Bash(npm install --save-dev @types/pg)",
+      "Bash(npx prisma generate)"
+    ]
+  }
+}

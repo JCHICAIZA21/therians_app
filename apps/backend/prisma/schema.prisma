@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  USER
+  PARTNER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  BANNED
+}
+
+enum PartnerType {
+  SHELTER
+  VETERINARY
+  RESCUE
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum PartnerUserRole {
+  OWNER
+  STAFF
+}
+
+enum PetSpecies {
+  DOG
+  CAT
+  RABBIT
+  BIRD
+  OTHER
+}
+
+enum PetSize {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+enum PetStatus {
+  AVAILABLE
+  IN_PROCESS
+  ADOPTED
+  PAUSED
+}
+
+enum MessageStatus {
+  SENT
+  READ
+}
+
+// ─── User ────────────────────────────────────────────────────────────────────
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  phone        String?
+  passwordHash String     @map("password_hash")
+  role         UserRole   @default(USER)
+  status       UserStatus @default(ACTIVE)
+  birthDate    DateTime?  @map("birth_date")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  deletedAt    DateTime?  @map("deleted_at")
+
+  partnerUsers     PartnerUser[]
+  sentMessages     Message[]     @relation("SentMessages")
+  receivedMessages Message[]     @relation("ReceivedMessages")
+
+  @@map("users")
+}
+
+// ─── Partner ─────────────────────────────────────────────────────────────────
+
+model Partner {
+  id                 String             @id @default(uuid())
+  type               PartnerType
+  legalName          String             @map("legal_name")
+  taxId              String             @unique @map("tax_id")
+  verificationStatus VerificationStatus @default(PENDING) @map("verification_status")
+  phone              String?
+  email              String?
+  address            String?
+  city               String?
+  website            String?
+  description        String?
+  createdAt          DateTime           @default(now()) @map("created_at")
+  deletedAt          DateTime?          @map("deleted_at")
+
+  partnerUsers PartnerUser[]
+  pets         Pet[]
+
+  @@map("partners")
+}
+
+// ─── PartnerUser (join) ───────────────────────────────────────────────────────
+
+model PartnerUser {
+  partnerId String          @map("partner_id")
+  userId    String          @map("user_id")
+  role      PartnerUserRole @default(OWNER)
+  createdAt DateTime        @default(now()) @map("created_at")
+
+  partner Partner @relation(fields: [partnerId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+
+  @@id([partnerId, userId])
+  @@map("partner_users")
+}
+
+// ─── Pet ─────────────────────────────────────────────────────────────────────
+
+model Pet {
+  id          String     @id @default(uuid())
+  partnerId   String     @map("partner_id")
+  name        String
+  species     PetSpecies
+  breed       String?
+  ageMonths   Int?       @map("age_months")
+  size        PetSize?
+  healthNotes String?    @map("health_notes")
+  status      PetStatus  @default(AVAILABLE)
+  city        String?
+  createdAt   DateTime   @default(now()) @map("created_at")
+  deletedAt   DateTime?  @map("deleted_at")
+
+  partner Partner @relation(fields: [partnerId], references: [id])
+
+  @@index([species, status, createdAt])
+  @@map("pets")
+}
+
+// ─── Message ─────────────────────────────────────────────────────────────────
+
+model Message {
+  id         String        @id @default(uuid())
+  senderId   String        @map("sender_id")
+  receiverId String        @map("receiver_id")
+  partnerId  String        @map("partner_id")
+  body       String
+  status     MessageStatus @default(SENT)
+  createdAt  DateTime      @default(now()) @map("created_at")
+  readAt     DateTime?     @map("read_at")
+
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  @@index([partnerId, createdAt])
+  @@index([receiverId, status])
+  @@map("messages")
+}
