@@ -7,11 +7,7 @@ services:
       POSTGRES_PASSWORD: therian
       POSTGRES_DB: therians_app
     ports:
-<<<<<<< HEAD
       - "5454:5432"
-=======
-      - "5432:5432"
->>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
     volumes:
       - pgdata:/var/lib/postgresql/data
 
