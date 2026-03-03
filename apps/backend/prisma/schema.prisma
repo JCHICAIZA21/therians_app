@@ -132,6 +132,8 @@ model Pet {
   ageMonths   Int?       @map("age_months")
   size        PetSize?
   healthNotes String?    @map("health_notes")
+  images      String[]   @default([])
+  videos      String[]   @default([])
   status      PetStatus  @default(AVAILABLE)
   city        String?
   createdAt   DateTime   @default(now()) @map("created_at")

@@ -10,7 +10,12 @@
       "Bash(npx prisma migrate dev --name init)",
       "Bash(npm install @prisma/adapter-pg pg dotenv)",
       "Bash(npm install --save-dev @types/pg)",
-      "Bash(npx prisma generate)"
+      "Bash(npx prisma generate)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm install axios @tanstack/react-query zustand)",
+      "Bash(npm run build)",
+      "Bash(test -f \"c:/Users/JCHICAIZA/OneDrive - Consycom SAS/Documentos/PROYECTOS/THERIAN_APP/apps/frontend/.env\")",
+      "Bash(npx prisma migrate dev --name add_pet_images)"
     ]
   }
 }

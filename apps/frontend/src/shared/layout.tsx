@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuthStore } from './auth.store';
 
 function NavItem({ to, label }: { to: string; label: string }) {
   return (
@@ -13,6 +14,14 @@ function NavItem({ to, label }: { to: string; label: string }) {
 }
 
 export function Layout({ children }: PropsWithChildren) {
+  const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="shell">
       <header className="header">
@@ -23,15 +32,40 @@ export function Layout({ children }: PropsWithChildren) {
             <p>Matching consciente + adopción responsable</p>
           </div>
         </div>
-        <span className="status ok">MVP</span>
+        <div className="header-actions">
+          {user ? (
+            <>
+              <span className="header-user-email">{user.email}</span>
+              <button type="button" className="btn header-btn" onClick={handleLogout}>
+                Salir
+              </button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login" className="btn header-btn">
+                Ingresar
+              </NavLink>
+              <NavLink to="/register" className="btn btn-primary header-btn">
+                Registrarse
+              </NavLink>
+            </>
+          )}
+        </div>
       </header>
 
-      <nav className="nav" aria-label="Navegación principal">
-        <NavItem to="/onboarding" label="Onboarding" />
-        <NavItem to="/matching" label="Matching" />
-        <NavItem to="/chat" label="Chat" />
-        <NavItem to="/adoption" label="Adopción" />
-      </nav>
+      {user && (
+        <nav className="nav" aria-label="Navegación principal">
+          <NavItem to="/pets" label="Adopción" />
+          <NavItem to="/matching" label="Matching" />
+          <NavItem to="/chat" label="Chat" />
+          {user.role !== 'PARTNER' && (
+            <NavItem to="/messages" label="Mensajes" />
+          )}
+          {user.role === 'PARTNER' && (
+            <NavItem to="/partner/dashboard" label="Mi panel" />
+          )}
+        </nav>
+      )}
 
       {children}
     </div>
