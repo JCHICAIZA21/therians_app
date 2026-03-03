@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { OnboardingPage } from '../modules/onboarding.page';
 import { MatchingPage } from '../modules/matching.page';
 import { ChatPage } from '../modules/chat.page';
+<<<<<<< HEAD
 import { LoginPage } from '../modules/auth/login.page';
 import { RegisterPage } from '../modules/auth/register.page';
 import { PetListingPage } from '../modules/pets/pet-listing.page';
@@ -10,10 +11,14 @@ import { PartnerDashboardPage } from '../modules/partner/partner-dashboard.page'
 import { PetFormPage } from '../modules/partner/pet-form.page';
 import { ConversationPage } from '../modules/messages/conversation.page';
 import { ProtectedRoute } from '../shared/protected-route';
+=======
+import { AdoptionPage } from '../modules/adoption.page';
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
 
 export function AppRouter() {
   return (
     <Routes>
+<<<<<<< HEAD
       <Route path="/" element={<Navigate to="/pets" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
@@ -60,6 +65,13 @@ export function AppRouter() {
           </ProtectedRoute>
         }
       />
+=======
+      <Route path="/" element={<Navigate to="/matching" replace />} />
+      <Route path="/onboarding" element={<OnboardingPage />} />
+      <Route path="/matching" element={<MatchingPage />} />
+      <Route path="/chat" element={<ChatPage />} />
+      <Route path="/adoption" element={<AdoptionPage />} />
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
     </Routes>
   );
 }

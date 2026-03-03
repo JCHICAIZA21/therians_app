@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+<<<<<<< HEAD
 import { APP_GUARD } from '@nestjs/core';
 import { HealthModule } from './health.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -22,5 +23,11 @@ import { RolesGuard } from './auth/guards/roles.guard';
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
   ],
+=======
+import { HealthModule } from './health.module';
+
+@Module({
+  imports: [HealthModule],
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
 })
 export class AppModule {}

@@ -1,6 +1,10 @@
 import { PropsWithChildren } from 'react';
+<<<<<<< HEAD
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthStore } from './auth.store';
+=======
+import { NavLink } from 'react-router-dom';
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
 
 function NavItem({ to, label }: { to: string; label: string }) {
   return (
@@ -14,6 +18,7 @@ function NavItem({ to, label }: { to: string; label: string }) {
 }
 
 export function Layout({ children }: PropsWithChildren) {
+<<<<<<< HEAD
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
 
@@ -22,6 +27,8 @@ export function Layout({ children }: PropsWithChildren) {
     navigate('/login');
   };
 
+=======
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
   return (
     <div className="shell">
       <header className="header">
@@ -32,6 +39,7 @@ export function Layout({ children }: PropsWithChildren) {
             <p>Matching consciente + adopción responsable</p>
           </div>
         </div>
+<<<<<<< HEAD
         <div className="header-actions">
           {user ? (
             <>
@@ -66,6 +74,17 @@ export function Layout({ children }: PropsWithChildren) {
           )}
         </nav>
       )}
+=======
+        <span className="status ok">MVP</span>
+      </header>
+
+      <nav className="nav" aria-label="Navegación principal">
+        <NavItem to="/onboarding" label="Onboarding" />
+        <NavItem to="/matching" label="Matching" />
+        <NavItem to="/chat" label="Chat" />
+        <NavItem to="/adoption" label="Adopción" />
+      </nav>
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
 
       {children}
     </div>

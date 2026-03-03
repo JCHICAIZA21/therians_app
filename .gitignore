@@ -9,9 +9,12 @@ coverage
 apps/frontend/*.tsbuildinfo
 
 !.env.example
+<<<<<<< HEAD
 
 .mp4
 .png
 .jpg
 .jpeg
 .gif
+=======
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026

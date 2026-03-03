@@ -2,15 +2,22 @@
   --bg: #111418;
   --bg-soft: #1a1f26;
   --surface: #1f2630;
+<<<<<<< HEAD
   --surface-raised: #2a3444;
   --text: #f4f6fb;
   --text-muted: #a5b0c3;
+=======
+  --text: #f4f6fb;
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
   --muted: #a5b0c3;
   --primary: #ff4d67;
   --primary-2: #ff7a45;
   --ok: #46d39a;
+<<<<<<< HEAD
   --success: #46d39a;
   --danger: #ff4d67;
+=======
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
   --border: rgba(255, 255, 255, 0.12);
 }
 
@@ -208,6 +215,7 @@ a { color: inherit; text-decoration: none; }
 .kpi b { display:block; }
 .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
 
+<<<<<<< HEAD
 /* ─── Header auth area ─────────────────────────────────────────────────────── */
 .header-actions {
   display: flex;
@@ -281,6 +289,8 @@ a { color: inherit; text-decoration: none; }
   flex: 1;
 }
 
+=======
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
 @media (min-width: 860px) {
   .shell { max-width: 900px; }
   .grid.two { grid-template-columns: 1.3fr 1fr; }

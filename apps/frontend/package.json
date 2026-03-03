@@ -10,12 +10,18 @@
     "lint": "echo 'lint placeholder frontend'"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
     "zustand": "^5.0.11"
+=======
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+>>>>>>> d3f7c4cfbe9221fa4d1a02d569bbafb5abcbc026
   },
   "devDependencies": {
     "@types/react": "^18.3.12",
